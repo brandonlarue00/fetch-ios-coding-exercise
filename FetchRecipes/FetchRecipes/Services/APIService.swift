@@ -10,31 +10,63 @@ import Foundation
 class APIService {
     // Singleton instance of the API Service
     static let shared = APIService()
-    
+
     // Function to fetch recipes
-    func fetchRecipes() {
-        // Check if URL is valid then assign to a constant
+    func fetchRecipes(completion: @escaping (Result<[Meal], Error>) -> Void) {
         guard let url = URL(string: Constants.dessertCategoryURL) else {
             print("Error: Invalid URL")
+            completion(.failure(NSError(domain: "URL Error", code: -1)))
             return
         }
-        
-        // Create a data task to perform the network request
-        URLSession.shared.dataTask(with: url) { data, response, error in
+
+        let urlRequest = URLRequest(url: url)
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
+                completion(.failure(error))
                 return
             }
-            // Check for error with request
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Error: Invalid Response")
+                completion(.failure(NSError(domain: "Invalid Response", code: -1)))
+                return
+            }
+            
+            print("HTTP Status Code: \(httpResponse.statusCode)")
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                print("Error: HTTP status code \(httpResponse.statusCode)")
+                completion(.failure(NSError(domain: "HTTP Error", code: httpResponse.statusCode)))
+                return
+            }
+            
             guard let data = data else {
                 print("Error: No data returned from the server")
+                completion(.failure(NSError(domain: "Data Error", code: -1)))
                 return
             }
             // Ensure there is data returned
-            if let jsonString = String(data: data, encoding: .utf8) {
-                print("ResponseJSON: \(jsonString)")
-            } else {
-                print("Error: Unable to convert data to string")
+            /*
+             if let jsonString = String(data: data, encoding: .utf8) {
+                 print("ResponseJSON: \(jsonString)")
+             } else {
+                 print("Error: Unable to convert data to string")
+             }
+              */
+            do {
+                let mealResponse = try JSONDecoder().decode([String: [Meal]].self, from: data)
+
+                if let meals = mealResponse["meals"] {
+                    print("Fetched Meals: \(meals)")
+                    completion(.success(meals))
+                } else {
+                    print("Error: Parsing meals failed")
+                    completion(.failure(NSError(domain: "Parsing Error", code: -1)))
+                }
+            } catch {
+                print("Error: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }.resume() // Start task
     }
