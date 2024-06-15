@@ -8,24 +8,32 @@
 import SwiftUI
 
 struct RecipeListView: View {
+    @State private var meals: [Meal] = []
+    @State private var errorMessage: String?
+    
     var body: some View {
         VStack {
-            Button(action: { fetchRecipes() }, label: {
-                Text("Fetch Recipes")
-            })
+            if let errorMessage = errorMessage {
+                Text("Error: \(errorMessage)")
+                    .foregroundStyle(Color.red)
+            }
+            
+            List(meals) { meal in
+                RecipeView(meal: meal)
+            }
+            .onAppear(perform: fetchRecipes)
         }
-        .padding()
     }
     
     private func fetchRecipes() {
         APIService.shared.fetchRecipes { result in
-            switch result {
-            case .success:
-                // print("Fetched Meals: \(meals)")
-                break
-            case .failure:
-                // print("Error: \(error.localizedDescription)")
-                break
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meals):
+                    self.meals = meals
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
             }
         }
     }
