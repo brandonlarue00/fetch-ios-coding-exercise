@@ -14,6 +14,7 @@
 		E27144482C1CE63600837CE4 /* FetchRecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27144472C1CE63600837CE4 /* FetchRecipesUITests.swift */; };
 		E271444A2C1CE63600837CE4 /* FetchRecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27144492C1CE63600837CE4 /* FetchRecipesUITestsLaunchTests.swift */; };
 		E2DFBAC32C1D1CDD0045DE7F /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E271442E2C1CE63400837CE4 /* RecipeListView.swift */; };
+		E2DFBAC62C1D1FF70045DE7F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBAC52C1D1FF70045DE7F /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		E27144432C1CE63600837CE4 /* FetchRecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27144472C1CE63600837CE4 /* FetchRecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITests.swift; sourceTree = "<group>"; };
 		E27144492C1CE63600837CE4 /* FetchRecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E2DFBAC52C1D1FF70045DE7F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		E271442B2C1CE63400837CE4 /* FetchRecipes */ = {
 			isa = PBXGroup;
 			children = (
+				E2DFBAC42C1D1FD20045DE7F /* Utilities */,
 				E2DFBAC22C1D1CA90045DE7F /* Views */,
 				E271442C2C1CE63400837CE4 /* FetchRecipesApp.swift */,
 				E27144302C1CE63600837CE4 /* Assets.xcassets */,
@@ -133,6 +136,14 @@
 				E271442E2C1CE63400837CE4 /* RecipeListView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E2DFBAC42C1D1FD20045DE7F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E2DFBAC52C1D1FF70045DE7F /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 			files = (
 				E2DFBAC32C1D1CDD0045DE7F /* RecipeListView.swift in Sources */,
 				E271442D2C1CE63400837CE4 /* FetchRecipesApp.swift in Sources */,
+				E2DFBAC62C1D1FF70045DE7F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
