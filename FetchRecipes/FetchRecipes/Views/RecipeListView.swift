@@ -7,18 +7,20 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RecipeListView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Recipes List")
         }
         .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct RecipeListView_Previews: PreviewProvider {
+    static var previews: some View {
+        RecipeListView()
+    }
 }
