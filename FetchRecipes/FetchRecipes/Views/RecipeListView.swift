@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct RecipeListView: View {
-    @State private var meals: [Meal] = []
-    @State private var errorMessage: String?
+    // @State private var meals: [Meal] = []
+    // @State private var errorMessage: String?
+    @StateObject private var viewModel = RecipeListViewModel()
     
     var body: some View {
         VStack {
-            if let errorMessage = errorMessage {
+            if let errorMessage = viewModel.errorMessage {
                 Text("Error: \(errorMessage)")
                     .foregroundStyle(Color.red)
             }
             
-            List(meals) { meal in
+            List(viewModel.meals) { meal in
                 RecipeView(meal: meal)
             }
-            .onAppear(perform: fetchRecipes)
+            .onAppear(perform: viewModel.fetchRecipes)
         }
     }
     
+    /*
     private func fetchRecipes() {
         APIService.shared.fetchRecipes { result in
             DispatchQueue.main.async {
@@ -37,6 +39,7 @@ struct RecipeListView: View {
             }
         }
     }
+     */
 }
 
 struct RecipeListView_Previews: PreviewProvider {

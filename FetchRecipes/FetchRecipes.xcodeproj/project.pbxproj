@@ -18,6 +18,7 @@
 		E2DFBAC92C1D23810045DE7F /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBAC82C1D23810045DE7F /* APIService.swift */; };
 		E2DFBACC2C1D47DC0045DE7F /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBACB2C1D47DC0045DE7F /* Recipe.swift */; };
 		E2DFBACE2C1D5E1A0045DE7F /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBACD2C1D5E1A0045DE7F /* RecipeView.swift */; };
+		E2DFBAD12C1E26590045DE7F /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBAD02C1E26590045DE7F /* RecipeListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		E2DFBAC82C1D23810045DE7F /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = FetchRecipes/Services/APIService.swift; sourceTree = SOURCE_ROOT; };
 		E2DFBACB2C1D47DC0045DE7F /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		E2DFBACD2C1D5E1A0045DE7F /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		E2DFBAD02C1E26590045DE7F /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		E271442B2C1CE63400837CE4 /* FetchRecipes */ = {
 			isa = PBXGroup;
 			children = (
+				E2DFBACF2C1E263E0045DE7F /* ViewModels */,
 				E2DFBACA2C1D47C80045DE7F /* Models */,
 				E2DFBAC72C1D23600045DE7F /* Services */,
 				E2DFBAC42C1D1FD20045DE7F /* Utilities */,
@@ -172,6 +175,14 @@
 				E2DFBACB2C1D47DC0045DE7F /* Recipe.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E2DFBACF2C1E263E0045DE7F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E2DFBAD02C1E26590045DE7F /* RecipeListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2DFBAD12C1E26590045DE7F /* RecipeListViewModel.swift in Sources */,
 				E2DFBACE2C1D5E1A0045DE7F /* RecipeView.swift in Sources */,
 				E2DFBAC32C1D1CDD0045DE7F /* RecipeListView.swift in Sources */,
 				E271442D2C1CE63400837CE4 /* FetchRecipesApp.swift in Sources */,
