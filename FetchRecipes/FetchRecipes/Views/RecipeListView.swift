@@ -10,10 +10,9 @@ import SwiftUI
 struct RecipeListView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Recipes List")
+            Button(action: { APIService.shared.fetchRecipes() }, label: {
+                Text("Fetch Recipes")
+            })
         }
         .padding()
     }
