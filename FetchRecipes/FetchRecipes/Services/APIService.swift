@@ -71,12 +71,13 @@ class APIService {
         }.resume() // Start task
     }
     
-    func fetchRecipeDetails(for id: String) {
+    func fetchRecipeDetails(for id: String, completion: @escaping (Result<RecipeDetails, Error>) -> Void) {
         let urlString = Constants.recipeDetailURL + id
         // print("URL String: \(urlString)")
         
         guard let url = URL(string: urlString) else {
             print("Error: Invalid URL")
+            completion(.failure(NSError(domain: "URL Error", code: -1)))
             return
         }
         
@@ -84,10 +85,12 @@ class APIService {
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
+                completion(.failure(error))
                 return
             }
             
             guard let httpRespoonse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "Invalid Response", code: -1)))
                 print("Error: Invalid Response")
                 return
             }
@@ -96,19 +99,32 @@ class APIService {
             
             guard (200...299).contains(httpRespoonse.statusCode) else {
                 print("Error: HTTP status code \(httpRespoonse.statusCode)")
+                completion(.failure(NSError(domain: "HTTP Error", code: -1)))
                 return
             }
             
             guard let data = data else {
                 print("Error: No data returned")
+                completion(.failure(NSError(domain: "Data Error", code: -1)))
                 return
             }
             
             do {
-                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                print("Fetched Recipe Details: \(jsonResponse)")
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("Raw JSON Response: \(jsonString)")
+                }
+                
+                let recipeDetailResponse = try JSONDecoder().decode([String: [RecipeDetails]].self, from: data)
+                if let recipeDetails = recipeDetailResponse["meals"]?.first {
+                    print("Recipe Details: \(recipeDetails)")
+                    completion(.success(recipeDetails))
+                } else {
+                    print("Error: Parsing meal details failed")
+                    completion(.failure(NSError(domain: "Parsing Error", code: -1)))
+                }
             } catch {
                 print("Error: \(error.localizedDescription)")
+                completion(.failure(error))
             }
         }.resume()
     }

@@ -13,6 +13,7 @@
 		E271443E2C1CE63600837CE4 /* FetchRecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E271443D2C1CE63600837CE4 /* FetchRecipesTests.swift */; };
 		E27144482C1CE63600837CE4 /* FetchRecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27144472C1CE63600837CE4 /* FetchRecipesUITests.swift */; };
 		E271444A2C1CE63600837CE4 /* FetchRecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27144492C1CE63600837CE4 /* FetchRecipesUITestsLaunchTests.swift */; };
+		E289C2D32C1E8C9000C9D753 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E289C2D22C1E8C9000C9D753 /* RecipeDetails.swift */; };
 		E2DFBAC32C1D1CDD0045DE7F /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E271442E2C1CE63400837CE4 /* RecipeListView.swift */; };
 		E2DFBAC62C1D1FF70045DE7F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBAC52C1D1FF70045DE7F /* Constants.swift */; };
 		E2DFBAC92C1D23810045DE7F /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFBAC82C1D23810045DE7F /* APIService.swift */; };
@@ -49,6 +50,7 @@
 		E27144432C1CE63600837CE4 /* FetchRecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27144472C1CE63600837CE4 /* FetchRecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITests.swift; sourceTree = "<group>"; };
 		E27144492C1CE63600837CE4 /* FetchRecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E289C2D22C1E8C9000C9D753 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		E2DFBAC52C1D1FF70045DE7F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = FetchRecipes/Utilities/Constants.swift; sourceTree = SOURCE_ROOT; };
 		E2DFBAC82C1D23810045DE7F /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = FetchRecipes/Services/APIService.swift; sourceTree = SOURCE_ROOT; };
 		E2DFBACB2C1D47DC0045DE7F /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				E2DFBACB2C1D47DC0045DE7F /* Recipe.swift */,
+				E289C2D22C1E8C9000C9D753 /* RecipeDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				E2DFBACE2C1D5E1A0045DE7F /* RecipeView.swift in Sources */,
 				E2DFBAC32C1D1CDD0045DE7F /* RecipeListView.swift in Sources */,
 				E271442D2C1CE63400837CE4 /* FetchRecipesApp.swift in Sources */,
+				E289C2D32C1E8C9000C9D753 /* RecipeDetails.swift in Sources */,
 				E2DFBAC92C1D23810045DE7F /* APIService.swift in Sources */,
 				E2DFBAC62C1D1FF70045DE7F /* Constants.swift in Sources */,
 				E2DFBACC2C1D47DC0045DE7F /* Recipe.swift in Sources */,

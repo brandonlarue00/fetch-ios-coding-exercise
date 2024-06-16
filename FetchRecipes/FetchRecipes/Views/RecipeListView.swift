@@ -23,7 +23,14 @@ struct RecipeListView: View {
             .onAppear(perform: viewModel.fetchRecipes)
             
             Button(action: {
-                APIService.shared.fetchRecipeDetails(for: "53049")
+                APIService.shared.fetchRecipeDetails(for: "53049") { result in
+                    switch result {
+                    case .success(let recipeDetails):
+                        print("Fetched Recipe Details: \(recipeDetails)")
+                    case .failure(let error):
+                        print("Error fetching recipe details: \(error.localizedDescription)")
+                    }
+                }
             }, label: {
                 Text("Test Recipe Details")
             })
