@@ -12,7 +12,7 @@ struct RecipeView: View {
 
     var body: some View {
         HStack {
-            Text(meal.name ?? "N/A")
+            Text(meal.name ?? "")
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)

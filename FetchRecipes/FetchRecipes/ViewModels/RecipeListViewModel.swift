@@ -27,7 +27,7 @@ class RecipeListViewModel: ObservableObject {
     private func processRecipes(_ meals: [Meal]) -> [Meal] {
         var cleanedRecipes = removeNullOrEmptyValues(from: meals)
         cleanedRecipes = removeDuplicates(from: cleanedRecipes)
-        return cleanedRecipes
+        return sortMealsAlphabetically(cleanedRecipes)
     }
     
     private func removeNullOrEmptyValues(from meals: [Meal]) -> [Meal] {
@@ -44,5 +44,9 @@ class RecipeListViewModel: ObservableObject {
             guard !seenIds.contains(meal.id) else { return false }
             return true
         }
+    }
+    
+    private func sortMealsAlphabetically(_ meals: [Meal]) -> [Meal] {
+        return meals.sorted { ($0.name ?? "") < ($1.name ?? "") }
     }
 }
