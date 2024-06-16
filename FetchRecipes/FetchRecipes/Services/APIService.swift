@@ -58,7 +58,7 @@ class APIService {
                 let mealResponse = try JSONDecoder().decode([String: [Meal]].self, from: data)
 
                 if let meals = mealResponse["meals"] {
-                    print("Fetched Meals: \(meals)")
+                    // print("Fetched Meals: \(meals)")
                     completion(.success(meals))
                 } else {
                     print("Error: Parsing meals failed")
@@ -69,5 +69,47 @@ class APIService {
                 completion(.failure(error))
             }
         }.resume() // Start task
+    }
+    
+    func fetchRecipeDetails(for id: String) {
+        let urlString = Constants.recipeDetailURL + id
+        // print("URL String: \(urlString)")
+        
+        guard let url = URL(string: urlString) else {
+            print("Error: Invalid URL")
+            return
+        }
+        
+        let urlRequest = URLRequest(url: url)
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpRespoonse = response as? HTTPURLResponse else {
+                print("Error: Invalid Response")
+                return
+            }
+            
+            print("HTTP Status code: \(httpRespoonse.statusCode)")
+            
+            guard (200...299).contains(httpRespoonse.statusCode) else {
+                print("Error: HTTP status code \(httpRespoonse.statusCode)")
+                return
+            }
+            
+            guard let data = data else {
+                print("Error: No data returned")
+                return
+            }
+            
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                print("Fetched Recipe Details: \(jsonResponse)")
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
+        }.resume()
     }
 }

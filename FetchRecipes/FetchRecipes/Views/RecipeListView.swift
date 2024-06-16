@@ -21,6 +21,12 @@ struct RecipeListView: View {
                 RecipeView(meal: meal)
             }
             .onAppear(perform: viewModel.fetchRecipes)
+            
+            Button(action: {
+                APIService.shared.fetchRecipeDetails(for: "53049")
+            }, label: {
+                Text("Test Recipe Details")
+            })
         }
     }
 }
