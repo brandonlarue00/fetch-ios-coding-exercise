@@ -16,11 +16,24 @@ class RecipeListViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let meals):
-                    self.meals = meals
+                    self.meals = self.processRecipes(meals)
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                 }
             }
+        }
+    }
+    
+    private func processRecipes(_ meals: [Meal]) -> [Meal] {
+        var cleanedRecipes = removeNullOrEmptyValues(from: meals)
+        return cleanedRecipes
+    }
+    
+    private func removeNullOrEmptyValues(from meals: [Meal]) -> [Meal] {
+        return meals.filter { meal in
+            guard let name = meal.name, !name.isEmpty else { return false }
+            guard let thumbnailURL = meal.thumbnailURL, !thumbnailURL.isEmpty else { return false }
+            return true
         }
     }
 }

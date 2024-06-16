@@ -9,8 +9,8 @@ import Foundation
 
 struct Meal: Identifiable, Codable {
     let id: String
-    let name: String
-    let thumbnailURL: String
+    let name: String?
+    let thumbnailURL: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "idMeal"

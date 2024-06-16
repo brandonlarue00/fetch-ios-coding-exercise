@@ -12,23 +12,25 @@ struct RecipeView: View {
 
     var body: some View {
         HStack {
-            Text(meal.name)
+            Text(meal.name ?? "N/A")
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
             
             Spacer()
             
-            AsyncImage(url: URL(string: meal.thumbnailURL),
-                       content: { image in
-                           image.resizable()
-                               .aspectRatio(contentMode: .fit)
-                               .frame(height: 75)
-                               .cornerRadius(10)
-                       },
-                       placeholder: {
-                           ProgressView()
-                       })
+            if let thumbnailURL = meal.thumbnailURL, let url = URL(string: thumbnailURL) {
+                AsyncImage(url: url,
+                           content: { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 75)
+                        .cornerRadius(10)
+                },
+                           placeholder: {
+                    ProgressView()
+                })
+            }
             // .aspectRatio(contentMode: .)
             // .frame(width: 50, height: 50)
             // .cornerRadius(10)

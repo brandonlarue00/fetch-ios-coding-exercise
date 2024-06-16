@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct RecipeListView: View {
-    // @State private var meals: [Meal] = []
-    // @State private var errorMessage: String?
     @StateObject private var viewModel = RecipeListViewModel()
     
     var body: some View {
@@ -25,21 +23,6 @@ struct RecipeListView: View {
             .onAppear(perform: viewModel.fetchRecipes)
         }
     }
-    
-    /*
-    private func fetchRecipes() {
-        APIService.shared.fetchRecipes { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let meals):
-                    self.meals = meals
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
-    }
-     */
 }
 
 struct RecipeListView_Previews: PreviewProvider {
