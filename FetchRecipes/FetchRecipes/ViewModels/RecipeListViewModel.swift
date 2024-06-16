@@ -24,13 +24,13 @@ class RecipeListViewModel: ObservableObject {
         }
     }
     
-    private func processRecipes(_ meals: [Meal]) -> [Meal] {
+    func processRecipes(_ meals: [Meal]) -> [Meal] {
         var cleanedRecipes = removeNullOrEmptyValues(from: meals)
         cleanedRecipes = removeDuplicates(from: cleanedRecipes)
         return sortMealsAlphabetically(cleanedRecipes)
     }
     
-    private func removeNullOrEmptyValues(from meals: [Meal]) -> [Meal] {
+    func removeNullOrEmptyValues(from meals: [Meal]) -> [Meal] {
         return meals.filter { meal in
             guard let name = meal.name, !name.isEmpty else { return false }
             guard let thumbnailURL = meal.thumbnailURL, !thumbnailURL.isEmpty else { return false }
@@ -38,15 +38,16 @@ class RecipeListViewModel: ObservableObject {
         }
     }
     
-    private func removeDuplicates(from meals: [Meal]) -> [Meal] {
-        let seenIds = Set<String>()
+    func removeDuplicates(from meals: [Meal]) -> [Meal] {
+        var seenIds = Set<String>()
         return meals.filter { meal in
             guard !seenIds.contains(meal.id) else { return false }
+            seenIds.insert(meal.id)
             return true
         }
     }
     
-    private func sortMealsAlphabetically(_ meals: [Meal]) -> [Meal] {
+    func sortMealsAlphabetically(_ meals: [Meal]) -> [Meal] {
         return meals.sorted { ($0.name ?? "") < ($1.name ?? "") }
     }
 }
