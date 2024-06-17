@@ -15,17 +15,18 @@ struct RecipeDetailsView: View {
         VStack {
             if let recipeDetails = viewModel.recipeDetails {
                 ScrollView {
-                    VStack(alignment: .leading) {
+                    VStack {
                         Text(recipeDetails.name)
                             .font(.largeTitle)
                             .fontWeight(/*@START_MENU_TOKEN@*/ .bold/*@END_MENU_TOKEN@*/)
+                            .multilineTextAlignment(.center)
                             .padding(.bottom, 10)
 
                         if let thumbnailURL = recipeDetails.thumbnailURL, let url = URL(string: thumbnailURL) {
                             AsyncImage(url: url) { image in
                                 image.resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(height: 150)
+                                    .frame(height: 250)
                                     .cornerRadius(8)
                             } placeholder: {
                                 ProgressView()
@@ -33,7 +34,8 @@ struct RecipeDetailsView: View {
                         }
 
                         Text("Ingredients")
-                            .font(.headline)
+                            .font(.title2)
+                            .fontWeight(.semibold)
                             .padding(.bottom, 5)
 
                         ForEach(Array(zip(recipeDetails.ingredients, recipeDetails.measures)), id: \.0) { ingredient, measure in
@@ -42,10 +44,17 @@ struct RecipeDetailsView: View {
                         }
 
                         Text("Instructions")
-                            .font(.headline)
+                            .font(.title2)
+                            .fontWeight(.semibold)
                             .padding(.bottom, 5)
 
-                        Text(recipeDetails.instructions)
+                        // Text(recipeDetails.instructions)
+                        VStack(alignment: .leading) {
+                            ForEach(viewModel.separateInstructions(recipeDetails.instructions), id: \.self) { instruction in
+                                Text(instruction)
+                                    .padding(.bottom, 5)
+                            }
+                        }
                     }
                 }
             } else if let errorMessage = viewModel.errorMessage {
@@ -58,6 +67,7 @@ struct RecipeDetailsView: View {
                     }
             }
         }
+        .padding()
         // .navigationTitle("Recipe")
     }
 }

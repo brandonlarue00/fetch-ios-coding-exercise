@@ -25,13 +25,14 @@ class RecipeDetailsViewModel: ObservableObject {
     }
 
     func processRecipeDetails(_ recipeDetails: RecipeDetails) -> RecipeDetails {
-        let processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }
+        let processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }.map { capitalizeFirstLetters(of: $0) }
         let processedMeasures = recipeDetails.measures.compactMap { $0 }.filter { !$0.isEmpty }
+        let processedInstructions = separateInstructions(recipeDetails.instructions)
 
         return RecipeDetails(
             id: recipeDetails.id,
             name: recipeDetails.name,
-            instructions: recipeDetails.instructions,
+            instructions: processedInstructions.joined(separator: "\n"),
             thumbnailURL: recipeDetails.thumbnailURL,
             area: recipeDetails.area,
             category: recipeDetails.category,
@@ -41,4 +42,12 @@ class RecipeDetailsViewModel: ObservableObject {
             measures: processedMeasures
         )
     }
+
+    func capitalizeFirstLetters(of text: String) -> String {
+        return text.components(separatedBy: " ").map { $0.capitalized }.joined(separator: " ")
+    }
+
+    func separateInstructions(_ instructions: String) -> [String] {
+            return instructions.components(separatedBy: .newlines).filter { !$0.isEmpty }
+        }
 }
