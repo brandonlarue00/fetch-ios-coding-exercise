@@ -13,29 +13,64 @@ struct RecipeView: View {
     var body: some View {
         HStack {
             Text(meal.name ?? "")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-            
+                .font(/*@START_MENU_TOKEN@*/ .title/*@END_MENU_TOKEN@*/)
+                .fontWeight(/*@START_MENU_TOKEN@*/ .bold/*@END_MENU_TOKEN@*/)
+                .multilineTextAlignment(/*@START_MENU_TOKEN@*/ .leading/*@END_MENU_TOKEN@*/)
+                .accessibilityIdentifier("recipeName-\(meal.id)")
+
             Spacer()
-            
+
+            /*
+             if let thumbnailURL = meal.thumbnailURL, let url = URL(string: thumbnailURL) {
+                 AsyncImage(url: url,
+                            content: { image in
+                     image.resizable()
+                         .aspectRatio(contentMode: .fit)
+                         .frame(height: 75)
+                         .cornerRadius(10)
+                         .accessibilityIdentifier("recipeThumbnail-\(meal.id)")
+                 },
+                            placeholder: {
+                     ProgressView()
+                         .accessibilityIdentifier("recipeThumbnailPlaceholder-\(meal.id)")
+                 })
+             }
+              */
+
             if let thumbnailURL = meal.thumbnailURL, let url = URL(string: thumbnailURL) {
-                AsyncImage(url: url,
-                           content: { image in
-                    image.resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 75)
-                        .cornerRadius(10)
-                },
-                           placeholder: {
-                    ProgressView()
-                })
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 75, height: 75)
+                            .accessibilityIdentifier("recipeThumbnailPlaceholder-\(meal.id)")
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 75)
+                            .cornerRadius(10)
+                            .accessibilityIdentifier("recipeThumbnail-\(meal.id)")
+                    case .failure:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 75)
+                            .cornerRadius(10)
+                            .accessibilityIdentifier("recipeThumbnailError-\(meal.id)")
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            } else {
+                Image(systemName: "photo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 75)
+                    .cornerRadius(10)
+                    .accessibilityIdentifier("recipeThumbnailUnavailable-\(meal.id)")
             }
-            // .aspectRatio(contentMode: .)
-            // .frame(width: 50, height: 50)
-            // .cornerRadius(10)
         }
-        // .padding(.horizontal, 10)
     }
 }
 

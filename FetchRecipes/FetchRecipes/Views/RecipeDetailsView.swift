@@ -21,6 +21,7 @@ struct RecipeDetailsView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/ .bold/*@END_MENU_TOKEN@*/)
                             .multilineTextAlignment(.center)
                             .padding(.bottom, 10)
+                            .accessibilityIdentifier("recipeName")
 
                         if let thumbnailURL = recipeDetails.thumbnailURL, let url = URL(string: thumbnailURL) {
                             AsyncImage(url: url) { image in
@@ -58,6 +59,7 @@ struct RecipeDetailsView: View {
                     }
                 }
                 .scrollIndicators(/*@START_MENU_TOKEN@*/.hidden/*@END_MENU_TOKEN@*/, axes: /*@START_MENU_TOKEN@*/[.vertical, .horizontal]/*@END_MENU_TOKEN@*/)
+                .accessibilityIdentifier("recipeDetailView")
             } else if let errorMessage = viewModel.errorMessage {
                 Text("Error: \(errorMessage)")
                     .foregroundStyle(Color.red)

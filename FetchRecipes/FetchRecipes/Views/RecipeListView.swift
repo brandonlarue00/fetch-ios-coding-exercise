@@ -18,31 +18,34 @@ struct RecipeListView: View {
                     Text("Error: \(errorMessage)")
                         .foregroundStyle(Color.red)
                 }
-                
                 List(viewModel.meals) { meal in
-                    ZStack {
+                    Button(action: {
+                        selectedRecipeId = meal.id
+                    }) {
                         RecipeView(meal: meal)
-                        NavigationLink(destination: RecipeDetailsView(mealId: meal.id)) {
-                            EmptyView()
-                        }
-                        .opacity(0)
                     }
+                    .buttonStyle(.plain)
                 }
+                .accessibilityIdentifier("recipeList")
                 .task {
                     await viewModel.fetchRecipes()
                 }
+                .navigationDestination(isPresented: .constant(selectedRecipeId != nil), destination: {
+                    if let id = selectedRecipeId {
+                        RecipeDetailsView(mealId: id)
+                    }
+                })
             }
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Recipes")
                         .font(.largeTitle)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(/*@START_MENU_TOKEN@*/ .bold/*@END_MENU_TOKEN@*/)
                         .padding(.top, 5)
                 }
             }
         }
-
     }
 }
 
