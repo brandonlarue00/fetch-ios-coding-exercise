@@ -30,6 +30,7 @@ class RecipeListViewModel: ObservableObject {
     func processRecipes(_ meals: [Meal]) -> [Meal] {
         var cleanedRecipes = removeNullOrEmptyValues(from: meals)
         cleanedRecipes = removeDuplicates(from: cleanedRecipes)
+        cleanedRecipes = capitalizeMealNames(cleanedRecipes)
         return sortMealsAlphabetically(cleanedRecipes)
     }
     
@@ -48,6 +49,18 @@ class RecipeListViewModel: ObservableObject {
             seenIds.insert(meal.id)
             return true
         }
+    }
+    
+    func capitalizeMealNames(_ meals: [Meal]) -> [Meal] {
+        return meals.map { meal in
+            var capitalizedMeal = meal
+            capitalizedMeal.name = capitalizeFirstLetters(of: meal.name ?? "")
+            return capitalizedMeal
+        }
+    }
+    
+    func capitalizeFirstLetters(of text: String) -> String {
+        return text.components(separatedBy: " ").map { $0.capitalized }.joined(separator: " ")
     }
     
     func sortMealsAlphabetically(_ meals: [Meal]) -> [Meal] {

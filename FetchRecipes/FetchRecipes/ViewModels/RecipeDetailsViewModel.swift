@@ -35,7 +35,7 @@ class RecipeDetailsViewModel: ObservableObject {
 
         return RecipeDetails(
             id: recipeDetails.id,
-            name: recipeDetails.name,
+            name: capitalizeFirstLetters(of: recipeDetails.name),
             instructions: recipeDetails.instructions,
             thumbnailURL: recipeDetails.thumbnailURL,
             area: recipeDetails.area,

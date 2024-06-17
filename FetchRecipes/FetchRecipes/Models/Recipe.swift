@@ -9,7 +9,7 @@ import Foundation
 
 struct Meal: Identifiable, Codable, Equatable {
     let id: String
-    let name: String?
+    var name: String?
     let thumbnailURL: String?
     
     enum CodingKeys: String, CodingKey {
