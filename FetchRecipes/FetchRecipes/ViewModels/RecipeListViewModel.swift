@@ -59,10 +59,6 @@ class RecipeListViewModel: ObservableObject {
         }
     }
     
-    func capitalizeFirstLetters(of text: String) -> String {
-        return text.components(separatedBy: " ").map { $0.capitalized }.joined(separator: " ")
-    }
-    
     func sortMealsAlphabetically(_ meals: [Meal]) -> [Meal] {
         return meals.sorted {
             ($0.name ?? "").localizedCaseInsensitiveCompare($1.name ?? "") == .orderedAscending

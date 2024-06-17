@@ -47,10 +47,6 @@ class RecipeDetailsViewModel: ObservableObject {
         )
     }
 
-    func capitalizeFirstLetters(of text: String) -> String {
-        return text.components(separatedBy: " ").map { $0.capitalized }.joined(separator: " ")
-    }
-
     func separateInstructions(_ instructions: String) -> [String] {
         return instructions.components(separatedBy: .newlines).filter { !$0.isEmpty }
     }
