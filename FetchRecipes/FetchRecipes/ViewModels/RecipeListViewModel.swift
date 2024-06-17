@@ -51,6 +51,8 @@ class RecipeListViewModel: ObservableObject {
     }
     
     func sortMealsAlphabetically(_ meals: [Meal]) -> [Meal] {
-        return meals.sorted { ($0.name ?? "") < ($1.name ?? "") }
+        return meals.sorted {
+            ($0.name ?? "").localizedCaseInsensitiveCompare($1.name ?? "") == .orderedAscending
+        }
     }
 }
