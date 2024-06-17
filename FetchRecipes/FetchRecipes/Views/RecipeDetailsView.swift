@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct RecipeDetailsView: View {
-    @State private var recipeDetails: RecipeDetails?
-    @State private var errorMessage: String?
+    @StateObject private var viewModel = RecipeDetailsViewModel()
     let mealId: String
 
     var body: some View {
         VStack {
-            if let recipeDetails = recipeDetails {
+            if let recipeDetails = viewModel.recipeDetails {
                 ScrollView {
                     VStack(alignment: .leading) {
                         Text(recipeDetails.name)
@@ -38,41 +37,28 @@ struct RecipeDetailsView: View {
                             .padding(.bottom, 5)
 
                         ForEach(Array(zip(recipeDetails.ingredients, recipeDetails.measures)), id: \.0) { ingredient, measure in
-                            Text("\(ingredient): \(measure)")
+                            Text("\(ingredient ?? ""): \(measure ?? "")")
                                 .padding(.bottom, 2)
                         }
 
                         Text("Instructions")
                             .font(.headline)
                             .padding(.bottom, 5)
-                        
+
                         Text(recipeDetails.instructions)
                     }
                 }
-            } else if let errorMessage = errorMessage {
+            } else if let errorMessage = viewModel.errorMessage {
                 Text("Error: \(errorMessage)")
                     .foregroundStyle(Color.red)
             } else {
                 ProgressView()
                     .onAppear {
-                        fetchRecipeDetails(for: mealId)
+                        viewModel.fetchRecipeDetails(for: mealId)
                     }
             }
         }
         // .navigationTitle("Recipe")
-    }
-    
-    private func fetchRecipeDetails(for id: String) {
-        APIService.shared.fetchRecipeDetails(for: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let recipeDetails):
-                    self.recipeDetails = recipeDetails
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
     }
 }
 
