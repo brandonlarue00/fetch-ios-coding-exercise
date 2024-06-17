@@ -26,21 +26,6 @@ class RecipeDetailsViewModel: ObservableObject {
             self.errorMessage = error.localizedDescription
         }
     }
-    
-    /*
-    func fetchRecipeDetails(for id: String) {
-        APIService.shared.fetchRecipeDetails(for: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let recipeDetails):
-                    self.recipeDetails = self.processRecipeDetails(recipeDetails)
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
-    }
-     */
 
     func processRecipeDetails(_ recipeDetails: RecipeDetails) -> RecipeDetails {
         var processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }.map { capitalizeFirstLetters(of: $0) }

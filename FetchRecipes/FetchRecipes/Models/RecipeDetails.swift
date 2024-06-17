@@ -1,6 +1,6 @@
 import Foundation
 
-struct RecipeDetails: Identifiable, Codable {
+struct RecipeDetails: Identifiable, Codable, Equatable {
     let id: String
     let name: String
     let instructions: String

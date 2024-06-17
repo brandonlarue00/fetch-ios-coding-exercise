@@ -27,21 +27,6 @@ class RecipeListViewModel: ObservableObject {
         }
     }
     
-    /*
-    func fetchRecipes() {
-        APIService.shared.fetchRecipes { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let meals):
-                    self.meals = self.processRecipes(meals)
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
-    }
-     */
-    
     func processRecipes(_ meals: [Meal]) -> [Meal] {
         var cleanedRecipes = removeNullOrEmptyValues(from: meals)
         cleanedRecipes = removeDuplicates(from: cleanedRecipes)
