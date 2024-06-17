@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RecipeDetailsView: View {
-    // @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeDetailsViewModel()
     let mealId: String
 
@@ -63,8 +62,8 @@ struct RecipeDetailsView: View {
                     .foregroundStyle(Color.red)
             } else {
                 ProgressView()
-                    .onAppear {
-                        viewModel.fetchRecipeDetails(for: mealId)
+                    .task {
+                        await viewModel.fetchRecipeDetails(for: mealId)
                     }
             }
         }

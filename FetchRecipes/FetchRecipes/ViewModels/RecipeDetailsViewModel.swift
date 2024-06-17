@@ -10,7 +10,24 @@ import Foundation
 class RecipeDetailsViewModel: ObservableObject {
     @Published var recipeDetails: RecipeDetails?
     @Published var errorMessage: String?
+    
+    private let apiService: APIServiceProtocol
+    
+    init(apiService: APIServiceProtocol = APIService.shared) {
+        self.apiService = apiService
+    }
 
+    @MainActor
+    func fetchRecipeDetails(for id: String) async {
+        do {
+            let recipeDetails = try await apiService.fetchRecipeDetails(for: id)
+            self.recipeDetails = self.processRecipeDetails(recipeDetails)
+        } catch {
+            self.errorMessage = error.localizedDescription
+        }
+    }
+    
+    /*
     func fetchRecipeDetails(for id: String) {
         APIService.shared.fetchRecipeDetails(for: id) { result in
             DispatchQueue.main.async {
@@ -23,6 +40,7 @@ class RecipeDetailsViewModel: ObservableObject {
             }
         }
     }
+     */
 
     func processRecipeDetails(_ recipeDetails: RecipeDetails) -> RecipeDetails {
         var processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }.map { capitalizeFirstLetters(of: $0) }

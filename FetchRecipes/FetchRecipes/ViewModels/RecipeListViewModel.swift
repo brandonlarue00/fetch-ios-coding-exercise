@@ -11,6 +11,23 @@ class RecipeListViewModel: ObservableObject {
     @Published var meals: [Meal] = []
     @Published var errorMessage: String?
     
+    private let apiService: APIServiceProtocol
+    
+    init(apiService: APIServiceProtocol = APIService.shared) {
+        self.apiService = apiService
+    }
+    
+    @MainActor
+    func fetchRecipes() async {
+        do {
+            let recipes = try await apiService.fetchRecipes()
+            self.meals = self.processRecipes(recipes)
+        } catch {
+            self.errorMessage = error.localizedDescription
+        }
+    }
+    
+    /*
     func fetchRecipes() {
         APIService.shared.fetchRecipes { result in
             DispatchQueue.main.async {
@@ -23,6 +40,7 @@ class RecipeListViewModel: ObservableObject {
             }
         }
     }
+     */
     
     func processRecipes(_ meals: [Meal]) -> [Meal] {
         var cleanedRecipes = removeNullOrEmptyValues(from: meals)

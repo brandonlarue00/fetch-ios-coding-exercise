@@ -28,7 +28,9 @@ struct RecipeListView: View {
                         .opacity(0)
                     }
                 }
-                .onAppear(perform: viewModel.fetchRecipes)
+                .task {
+                    await viewModel.fetchRecipes()
+                }
             }
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
@@ -40,6 +42,7 @@ struct RecipeListView: View {
                 }
             }
         }
+
     }
 }
 

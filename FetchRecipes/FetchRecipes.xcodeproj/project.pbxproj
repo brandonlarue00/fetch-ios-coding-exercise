@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E26177982C20145700BDBCCF /* RecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26177972C20145700BDBCCF /* RecipeDetailsView.swift */; };
 		E261779A2C20227500BDBCCF /* RecipeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26177992C20227500BDBCCF /* RecipeDetailsViewModel.swift */; };
+		E261779C2C20A58300BDBCCF /* APIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E261779B2C20A58300BDBCCF /* APIServiceTests.swift */; };
+		E261779E2C20A59700BDBCCF /* RecipeListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E261779D2C20A59700BDBCCF /* RecipeListViewModelTests.swift */; };
+		E26177A02C20A5AB00BDBCCF /* RecipeDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E261779F2C20A5AB00BDBCCF /* RecipeDetailsViewModelTests.swift */; };
 		E271442D2C1CE63400837CE4 /* FetchRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E271442C2C1CE63400837CE4 /* FetchRecipesApp.swift */; };
 		E27144312C1CE63600837CE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E27144302C1CE63600837CE4 /* Assets.xcassets */; };
 		E27144342C1CE63600837CE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E27144332C1CE63600837CE4 /* Preview Assets.xcassets */; };
@@ -44,6 +47,9 @@
 /* Begin PBXFileReference section */
 		E26177972C20145700BDBCCF /* RecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView.swift; sourceTree = "<group>"; };
 		E26177992C20227500BDBCCF /* RecipeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewModel.swift; sourceTree = "<group>"; };
+		E261779B2C20A58300BDBCCF /* APIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTests.swift; sourceTree = "<group>"; };
+		E261779D2C20A59700BDBCCF /* RecipeListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModelTests.swift; sourceTree = "<group>"; };
+		E261779F2C20A5AB00BDBCCF /* RecipeDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		E27144292C1CE63400837CE4 /* FetchRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E271442C2C1CE63400837CE4 /* FetchRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchRecipesApp.swift; path = FetchRecipes/FetchRecipesApp.swift; sourceTree = SOURCE_ROOT; };
 		E271442E2C1CE63400837CE4 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeListView.swift; path = FetchRecipes/Views/RecipeListView.swift; sourceTree = SOURCE_ROOT; };
@@ -134,6 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				E271443D2C1CE63600837CE4 /* FetchRecipesTests.swift */,
+				E261779B2C20A58300BDBCCF /* APIServiceTests.swift */,
+				E261779D2C20A59700BDBCCF /* RecipeListViewModelTests.swift */,
+				E261779F2C20A5AB00BDBCCF /* RecipeDetailsViewModelTests.swift */,
 			);
 			path = FetchRecipesTests;
 			sourceTree = "<group>";
@@ -341,7 +350,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E261779E2C20A59700BDBCCF /* RecipeListViewModelTests.swift in Sources */,
+				E261779C2C20A58300BDBCCF /* APIServiceTests.swift in Sources */,
 				E271443E2C1CE63600837CE4 /* FetchRecipesTests.swift in Sources */,
+				E26177A02C20A5AB00BDBCCF /* RecipeDetailsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
