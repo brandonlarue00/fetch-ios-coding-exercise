@@ -59,7 +59,7 @@ struct RecipeDetailsView: View {
                     }
             }
         }
-        .navigationTitle("Recipe")
+        // .navigationTitle("Recipe")
     }
     
     private func fetchRecipeDetails(for id: String) {
