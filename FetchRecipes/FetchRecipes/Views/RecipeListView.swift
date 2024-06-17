@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
     @State private var selectedRecipeId: String?
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -22,19 +22,23 @@ struct RecipeListView: View {
                 List(viewModel.meals) { meal in
                     ZStack {
                         RecipeView(meal: meal)
-                        NavigationLink(
-                            value: meal.id,
-                            label: { EmptyView() }
-                        )
+                        NavigationLink(destination: RecipeDetailsView(mealId: meal.id)) {
+                            EmptyView()
+                        }
                         .opacity(0)
                     }
                 }
                 .onAppear(perform: viewModel.fetchRecipes)
-                .navigationDestination(for: String.self) { mealId in
-                    RecipeDetailsView(mealId: mealId)
+            }
+            .toolbarTitleDisplayMode(.inlineLarge)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Recipes")
+                        .font(.largeTitle)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .padding(.top, 5)
                 }
             }
-            // .navigationTitle("Recipes")
         }
     }
 }

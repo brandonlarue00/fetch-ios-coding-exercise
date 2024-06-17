@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecipeDetailsView: View {
+    // @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeDetailsViewModel()
     let mealId: String
 
@@ -67,8 +68,8 @@ struct RecipeDetailsView: View {
                     }
             }
         }
-        .padding()
-        // .navigationTitle("Recipe")
+        .padding(.horizontal, 20)
+        .toolbarTitleDisplayMode(.inline)
     }
 }
 
