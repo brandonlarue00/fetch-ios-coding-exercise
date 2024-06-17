@@ -25,14 +25,15 @@ class RecipeDetailsViewModel: ObservableObject {
     }
 
     func processRecipeDetails(_ recipeDetails: RecipeDetails) -> RecipeDetails {
-        let processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }.map { capitalizeFirstLetters(of: $0) }
-        let processedMeasures = recipeDetails.measures.compactMap { $0 }.filter { !$0.isEmpty }
-        let processedInstructions = separateInstructions(recipeDetails.instructions)
+        var processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }.map { capitalizeFirstLetters(of: $0) }
+        var processedMeasures = recipeDetails.measures.compactMap { $0 }.filter { !$0.isEmpty }
+        
+        (processedIngredients, processedMeasures) = removeDuplicates(ingredients: processedIngredients, measures: processedMeasures)
 
         return RecipeDetails(
             id: recipeDetails.id,
             name: recipeDetails.name,
-            instructions: processedInstructions.joined(separator: "\n"),
+            instructions: recipeDetails.instructions,
             thumbnailURL: recipeDetails.thumbnailURL,
             area: recipeDetails.area,
             category: recipeDetails.category,
@@ -48,6 +49,20 @@ class RecipeDetailsViewModel: ObservableObject {
     }
 
     func separateInstructions(_ instructions: String) -> [String] {
-            return instructions.components(separatedBy: .newlines).filter { !$0.isEmpty }
+        return instructions.components(separatedBy: .newlines).filter { !$0.isEmpty }
+    }
+
+    func removeDuplicates(ingredients: [String], measures: [String]) -> ([String], [String]) {
+        var uniqueIngredients = [String]()
+        var uniqueMeasures = [String]()
+
+        for (index, ingredient) in ingredients.enumerated() {
+            if !uniqueIngredients.contains(ingredient) {
+                uniqueIngredients.append(ingredient)
+                uniqueMeasures.append(measures[safe: index] ?? "")
+            }
         }
+
+        return (uniqueIngredients, uniqueMeasures)
+    }
 }
