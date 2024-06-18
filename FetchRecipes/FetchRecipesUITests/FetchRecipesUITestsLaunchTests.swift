@@ -8,7 +8,6 @@
 import XCTest
 
 final class FetchRecipesUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
@@ -21,8 +20,12 @@ final class FetchRecipesUITestsLaunchTests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        // Insert steps here to perform after app launch but before taking a screenshot,
-        // such as logging into a test account or navigating somewhere in the app
+        let exists = NSPredicate(format: "exists == true")
+        let mainView = app.collectionViews["mainView"]
+        
+        expectation(for: exists, evaluatedWith: mainView, handler: nil)
+        
+        waitForExpectations(timeout: 10, handler: nil)
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "Launch Screen"

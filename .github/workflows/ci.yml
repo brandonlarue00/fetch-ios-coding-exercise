@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  unit-tests:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      - name: Build and run unit tests
+        run: |
+          cd FetchRecipes
+          mkdir -p reports/unit
+          set -o pipefail && xcodebuild -project FetchRecipes.xcodeproj \
+            -scheme FetchRecipes \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            test -only-testing:FetchRecipesTests | tee reports/unit/xcodebuild.log
+
+      - name: Upload unit test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-reports
+          path: FetchRecipes/reports/unit
+
+  ui-tests:
+    runs-on: macos-latest
+    needs: unit-tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      - name: Build and run UI tests
+        run: |
+          cd FetchRecipes
+          mkdir -p reports/ui
+          set -o pipefail && xcodebuild -project FetchRecipes.xcodeproj \
+            -scheme FetchRecipes \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            test -only-testing:FetchRecipesUITests/FetchRecipesUITests | tee reports/ui/xcodebuild.log
+
+      - name: Upload UI test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-reports
+          path: FetchRecipes/reports/ui
+
+  ui-tests-launch:
+    runs-on: macos-latest
+    needs: ui-tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      - name: Build and run launch UI test
+        run: |
+          cd FetchRecipes
+          xcodebuild -project FetchRecipes.xcodeproj \
+            -scheme FetchRecipes \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.5' \
+            test -only-testing:FetchRecipesUITests/FetchRecipesUITestsLaunchTests
+
+      - name: Upload launch UI test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-reports-launch
+          path: FetchRecipes/reports/launch
