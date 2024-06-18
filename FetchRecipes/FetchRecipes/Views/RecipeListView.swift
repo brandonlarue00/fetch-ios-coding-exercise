@@ -36,6 +36,7 @@ struct RecipeListView: View {
                     }
                 })
             }
+            .accessibilityIdentifier("mainView")
             .toolbarTitleDisplayMode(.inlineLarge)
             .toolbar {
                 ToolbarItem(placement: .principal) {
