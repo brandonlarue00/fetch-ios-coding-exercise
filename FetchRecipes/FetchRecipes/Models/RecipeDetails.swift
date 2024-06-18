@@ -32,28 +32,28 @@ struct RecipeDetails: Identifiable, Codable, Equatable {
     }
     
     init(
-            id: String,
-            name: String,
-            instructions: String,
-            thumbnailURL: String? = nil,
-            area: String? = nil,
-            category: String? = nil,
-            source: String? = nil,
-            youtube: String? = nil,
-            ingredients: [String?],
-            measures: [String?]
-        ) {
-            self.id = id
-            self.name = name
-            self.instructions = instructions
-            self.thumbnailURL = thumbnailURL
-            self.area = area
-            self.category = category
-            self.source = source
-            self.youtube = youtube
-            self.ingredients = ingredients
-            self.measures = measures
-        }
+        id: String,
+        name: String,
+        instructions: String,
+        thumbnailURL: String? = nil,
+        area: String? = nil,
+        category: String? = nil,
+        source: String? = nil,
+        youtube: String? = nil,
+        ingredients: [String?],
+        measures: [String?]
+    ) {
+        self.id = id
+        self.name = name
+        self.instructions = instructions
+        self.thumbnailURL = thumbnailURL
+        self.area = area
+        self.category = category
+        self.source = source
+        self.youtube = youtube
+        self.ingredients = ingredients
+        self.measures = measures
+    }
 
     // Custom initializer for decoding
     init(from decoder: Decoder) throws {

@@ -10,9 +10,9 @@ import Foundation
 class RecipeDetailsViewModel: ObservableObject {
     @Published var recipeDetails: RecipeDetails?
     @Published var errorMessage: String?
-    
+
     private let apiService: APIServiceProtocol
-    
+
     init(apiService: APIServiceProtocol = APIService.shared) {
         self.apiService = apiService
     }
@@ -30,8 +30,8 @@ class RecipeDetailsViewModel: ObservableObject {
     func processRecipeDetails(_ recipeDetails: RecipeDetails) -> RecipeDetails {
         var processedIngredients = recipeDetails.ingredients.compactMap { $0 }.filter { !$0.isEmpty }.map { capitalizeFirstLetters(of: $0) }
         var processedMeasures = recipeDetails.measures.compactMap { $0 }.filter { !$0.isEmpty }
-        
-        (processedIngredients, processedMeasures) = removeDuplicates(ingredients: processedIngredients, measures: processedMeasures)
+
+        (processedIngredients, processedMeasures) = self.removeDuplicates(ingredients: processedIngredients, measures: processedMeasures)
 
         return RecipeDetails(
             id: recipeDetails.id,

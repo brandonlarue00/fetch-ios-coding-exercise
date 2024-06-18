@@ -27,21 +27,21 @@ final class FetchRecipesUITests: XCTestCase {
     }
 
     func testRecipeListLoads() throws {
-            let collectionView = app.collectionViews["recipeList"]
+        let collectionView = app.collectionViews["recipeList"]
 
-            let exists = NSPredicate(format: "exists == true")
-            expectation(for: exists, evaluatedWith: collectionView, handler: nil)
+        let exists = NSPredicate(format: "exists == true")
+        expectation(for: exists, evaluatedWith: collectionView, handler: nil)
 
-            waitForExpectations(timeout: 15, handler: nil)
-            XCTAssertTrue(collectionView.exists, "The recipe list collection view should exist.")
+        waitForExpectations(timeout: 15, handler: nil)
+        XCTAssertTrue(collectionView.exists, "The recipe list collection view should exist.")
 
-            let firstCell = collectionView.cells.element(boundBy: 0)
+        let firstCell = collectionView.cells.element(boundBy: 0)
 
-            expectation(for: exists, evaluatedWith: firstCell, handler: nil)
+        expectation(for: exists, evaluatedWith: firstCell, handler: nil)
 
-            waitForExpectations(timeout: 15, handler: nil)
-            XCTAssertTrue(firstCell.exists, "The first cell in the recipe list should exist.")
-        }
+        waitForExpectations(timeout: 15, handler: nil)
+        XCTAssertTrue(firstCell.exists, "The first cell in the recipe list should exist.")
+    }
 
     func testRecipeDetailViewLoads() throws {
         let tableView = app.tables["recipeList"]

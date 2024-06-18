@@ -21,9 +21,9 @@ class RecipeListViewModel: ObservableObject {
     func fetchRecipes() async {
         do {
             let recipes = try await apiService.fetchRecipes()
-            self.meals = self.processRecipes(recipes)
+            meals = processRecipes(recipes)
         } catch {
-            self.errorMessage = error.localizedDescription
+            errorMessage = error.localizedDescription
         }
     }
     

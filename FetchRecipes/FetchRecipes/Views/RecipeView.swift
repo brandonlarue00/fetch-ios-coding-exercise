@@ -20,23 +20,6 @@ struct RecipeView: View {
 
             Spacer()
 
-            /*
-             if let thumbnailURL = meal.thumbnailURL, let url = URL(string: thumbnailURL) {
-                 AsyncImage(url: url,
-                            content: { image in
-                     image.resizable()
-                         .aspectRatio(contentMode: .fit)
-                         .frame(height: 75)
-                         .cornerRadius(10)
-                         .accessibilityIdentifier("recipeThumbnail-\(meal.id)")
-                 },
-                            placeholder: {
-                     ProgressView()
-                         .accessibilityIdentifier("recipeThumbnailPlaceholder-\(meal.id)")
-                 })
-             }
-              */
-
             if let thumbnailURL = meal.thumbnailURL, let url = URL(string: thumbnailURL) {
                 AsyncImage(url: url) { phase in
                     switch phase {

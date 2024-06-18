@@ -58,7 +58,7 @@ struct RecipeDetailsView: View {
                         }
                     }
                 }
-                .scrollIndicators(/*@START_MENU_TOKEN@*/.hidden/*@END_MENU_TOKEN@*/, axes: /*@START_MENU_TOKEN@*/[.vertical, .horizontal]/*@END_MENU_TOKEN@*/)
+                .scrollIndicators(/*@START_MENU_TOKEN@*/ .hidden/*@END_MENU_TOKEN@*/, axes: /*@START_MENU_TOKEN@*/[.vertical, .horizontal]/*@END_MENU_TOKEN@*/)
                 .accessibilityIdentifier("recipeDetailView")
             } else if let errorMessage = viewModel.errorMessage {
                 Text("Error: \(errorMessage)")

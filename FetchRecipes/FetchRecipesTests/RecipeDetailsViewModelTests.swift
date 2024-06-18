@@ -5,11 +5,10 @@
 //  Created by Brandon LaRue on 6/17/24.
 //
 
-import XCTest
 @testable import FetchRecipes
+import XCTest
 
 final class RecipeDetailsViewModelTests: XCTestCase {
-
     var viewModel: RecipeDetailsViewModel!
 
     override func setUpWithError() throws {
@@ -33,23 +32,23 @@ final class RecipeDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(uniqueIngredients, ["Sugar", "Flour"])
         XCTAssertEqual(uniqueMeasures, ["1 cup", "2 cups"])
     }
-    
+
     func testProcessRecipeDetails() {
-            let recipeDetails = RecipeDetails(
-                id: "1",
-                name: "meal 1",
-                instructions: "Instructions",
-                thumbnailURL: "URL1",
-                area: "Area",
-                category: "Category",
-                source: "Source",
-                youtube: "YouTube",
-                ingredients: ["sugar", "flour", "sugar"],
-                measures: ["1 cup", "2 cups", "1 cup"]
-            )
-            let processedDetails = viewModel.processRecipeDetails(recipeDetails)
-            XCTAssertEqual(processedDetails.name, "Meal 1")
-            XCTAssertEqual(processedDetails.ingredients, ["Sugar", "Flour"])
-            XCTAssertEqual(processedDetails.measures, ["1 cup", "2 cups"])
-        }
+        let recipeDetails = RecipeDetails(
+            id: "1",
+            name: "meal 1",
+            instructions: "Instructions",
+            thumbnailURL: "URL1",
+            area: "Area",
+            category: "Category",
+            source: "Source",
+            youtube: "YouTube",
+            ingredients: ["sugar", "flour", "sugar"],
+            measures: ["1 cup", "2 cups", "1 cup"]
+        )
+        let processedDetails = viewModel.processRecipeDetails(recipeDetails)
+        XCTAssertEqual(processedDetails.name, "Meal 1")
+        XCTAssertEqual(processedDetails.ingredients, ["Sugar", "Flour"])
+        XCTAssertEqual(processedDetails.measures, ["1 cup", "2 cups"])
+    }
 }
