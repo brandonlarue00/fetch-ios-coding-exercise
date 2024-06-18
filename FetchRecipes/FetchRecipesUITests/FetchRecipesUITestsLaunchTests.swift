@@ -25,8 +25,6 @@ final class FetchRecipesUITestsLaunchTests: XCTestCase {
         
         expectation(for: exists, evaluatedWith: mainView, handler: nil)
         
-        print(app.debugDescription)
-        
         waitForExpectations(timeout: 10, handler: nil)
 
         let attachment = XCTAttachment(screenshot: app.screenshot())

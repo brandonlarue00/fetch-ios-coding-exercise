@@ -27,7 +27,7 @@ final class FetchRecipesUITests: XCTestCase {
     }
 
     func testRecipeListLoads() throws {
-        let collectionView = app.collectionViews["recipeList"]
+        let collectionView = app.collectionViews["mainView"]
 
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: collectionView, handler: nil)
