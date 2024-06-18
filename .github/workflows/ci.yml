@@ -22,12 +22,6 @@ jobs:
         with:
           xcode-version: '15.4'
 
-      - name: Install dependencies
-        run: |
-          cd FetchRecipes
-          sudo gem install cocoapods
-          pod install
-
       - name: Build and run tests
         run: |
           cd FetchRecipes
