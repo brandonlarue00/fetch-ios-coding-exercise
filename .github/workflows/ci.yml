@@ -59,7 +59,7 @@ jobs:
             -scheme FetchRecipes \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
-            test -only-testing:FetchRecipesUITests -skip-testing:FetchRecipesUITests/FetchRecipesUILaunchTests | tee reports/ui/xcodebuild.log
+            test -only-testing:FetchRecipesUITests/FetchRecipesUITests | tee reports/ui/xcodebuild.log
 
       - name: Upload UI test results
         if: always()
